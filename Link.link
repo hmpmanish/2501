@@ -1,1 +1,22 @@
 https://chatgpt.com/share/6a829e6d-9e84-83ee-a4a7-f9b70bcd0fcb?ogimg=plain
+
+
+Ping statistics for 192.168.1.1:
+
+Packets: Sent = 1, Received 0, Lost = 1 (100% loss),
+
+Control-C
+
+C
+
+C:\>
+
+C:\>
+
+C:\>
+
+C:\>
+
+C:\>ping 192.168.1.1
+
+Pinging 192.168.1.1 with 32 bytes of data
