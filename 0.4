@@ -1,0 +1,28 @@
+Open Router2 → **CLI** tab, press Enter, then paste this:
+
+```
+enable
+configure terminal
+interface g0/0
+ ip address 10.0.2.2 255.255.255.252
+ no shutdown
+interface g0/1
+ ip address 10.0.4.2 255.255.255.252
+ no shutdown
+interface g0/2
+ ip address 192.168.1.1 255.255.255.0
+ no shutdown
+exit
+router ospf 1
+ network 10.0.2.0 0.0.0.3 area 0
+ network 10.0.4.0 0.0.0.3 area 0
+ network 192.168.1.0 0.0.0.255 area 0
+end
+write memory
+```
+
+All routers are now configured. Next:
+
+1. Set the PC IPs (PC0 192.168.0.10, PC1 192.168.1.10, masks 255.255.255.0, gateways .1).
+2. On Router0, run `show ip ospf neighbor` (two FULL neighbors) and `show ip route ospf` (two equal-cost routes to 192.168.1.0/24).
+3. Then apply `ip ospf cost 100` on Router0 g0/0 and re-check the route.
