@@ -1,0 +1,17 @@
+On PC0, open **Desktop → Command Prompt** and run:
+
+```
+ipconfig
+ping 192.168.0.1
+ping 192.168.1.10
+tracert 192.168.1.10
+```
+
+- `ipconfig` should show 192.168.0.10, mask 255.255.255.0, gateway 192.168.0.1.
+- `ping 192.168.0.1` tests the link to Router0. This should work first.
+- `ping 192.168.1.10` tests the whole path to PC1. The first reply may time out because of ARP or OSPF still converging, so send it again.
+- `tracert 192.168.1.10` shows the hops.
+
+**Before the cost change:** the hops go 192.168.0.1, then either 10.0.1.2 (Router1) or 10.0.3.2 (Router3), then 192.168.1.10.
+
+**After `ip ospf cost 100` on Router0 g0/0:** the hops should always be 192.168.0.1, then 10.0.3.2, then 10.0.4.2, then 192.168.1.10, which means traffic goes through Router3.
