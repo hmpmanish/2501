@@ -1,0 +1,20 @@
+Open Router1 → **CLI** tab, press Enter, then paste this:
+
+```
+enable
+configure terminal
+interface g0/0
+ ip address 10.0.1.2 255.255.255.252
+ no shutdown
+interface g0/1
+ ip address 10.0.2.1 255.255.255.252
+ no shutdown
+exit
+router ospf 1
+ network 10.0.1.0 0.0.0.3 area 0
+ network 10.0.2.0 0.0.0.3 area 0
+end
+write memory
+```
+
+Check with `show ip interface brief`. The R0–R1 link should turn up/up now, since Router0 is already configured. Then do Router3 and Router2.
