@@ -1,0 +1,32 @@
+Open Router0 → **CLI** tab, press Enter, then paste this:
+
+```
+enable
+configure terminal
+interface g0/0
+ ip address 10.0.1.1 255.255.255.252
+ no shutdown
+interface g0/1
+ ip address 10.0.3.1 255.255.255.252
+ no shutdown
+interface g0/2
+ ip address 192.168.0.1 255.255.255.0
+ no shutdown
+exit
+router ospf 1
+ network 10.0.1.0 0.0.0.3 area 0
+ network 10.0.3.0 0.0.0.3 area 0
+ network 192.168.0.0 0.0.0.255 area 0
+end
+write memory
+```
+
+Check it with `show ip interface brief`.
+
+Later, for the cost test, add:
+```
+configure terminal
+interface g0/0
+ ip ospf cost 100
+end
+```
